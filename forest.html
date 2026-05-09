@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>🌿 Growing Forest</title>
+<link rel="stylesheet" href="/static/css/style.css">
+<style>
+    #forest-stage {
+        width: 200px;
+        height: 300px;
+        margin: auto;
+        animation: fadein 2s ease-in-out;
+    }
+
+    @keyframes grow {
+        from { transform: scale(0.3); opacity: 0.5; }
+        to { transform: scale(1); opacity: 1; }
+    }
+
+    .plant, .tree, .forest {
+        animation: grow 3s forwards;
+    }
+</style>
+</head>
+
+<body>
+<h1>🌲 Your Living Mood Forest</h1>
+<p>Your emotional journey is shaping nature...</p>
+
+<div id="forest-stage"></div>
+
+<script>
+fetch("/forest_data")
+.then(res => res.json())
+.then(data => {
+    let stageDiv = document.getElementById("forest-stage");
+    let count = data.count;
+
+    if (count < 4) {
+        stageDiv.innerHTML = `<img class="plant" src="/static/images/sprout.png" width="200">`;
+    } 
+    else if (count < 8) {
+        stageDiv.innerHTML = `<img class="plant" src="/static/images/plant.png" width="220">`;
+    } 
+    else if (count < 13) {
+        stageDiv.innerHTML = `<img class="tree" src="/static/images/tree_small.png" width="250">`;
+    }
+    else if (count < 21) {
+        stageDiv.innerHTML = `<img class="tree" src="/static/images/tree_full.png" width="280">`;
+    } 
+    else {
+        stageDiv.innerHTML = `<img class="forest" src="/static/images/forest.png" width="320">`;
+    }
+});
+</script>
+
+</body>
+</html>
