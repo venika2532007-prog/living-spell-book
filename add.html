@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>✨ Add New Spell ✨</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<h1>🪄 Add a New Spell</h1>
+
+<form method="POST" action="/add_spell">
+
+    <label>✨ Spell Name:</label>
+    <input type="text" name="spell_name" required><br><br>
+
+    <label>📚 Category:</label>
+    <select name="category">
+        <option>Healing</option>
+        <option>Protection</option>
+        <option>Energy</option>
+        <option>Moon Magic</option>
+    </select><br><br>
+
+    <label>🔮 Emoji (optional):</label>
+    <input type="text" name="emoji" placeholder="⚡🌙💙"><br><br>
+
+    <button class="potion-btn" type="submit">🧪 Save Spell</button>
+</form>
+
+<script>
+const emojis = ["✨", "⚡", "🌙", "💖", "🔮", "🪽"];
+function createSparkle() {
+    const spark = document.createElement("div");
+    spark.classList.add("sparkle");
+    spark.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+    spark.style.left = Math.random() * window.innerWidth + "px";
+    document.body.appendChild(spark);
+    setTimeout(() => spark.remove(), 6000);
+}
+setInterval(createSparkle, 600);
+</script>
+
+<div class="magic-sparkles">
+    ✨ 🪄 🌙 🔮 💖 ✨
+</div>
+</body>
+</html>
