@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>📖 Your Spellbook</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<nav>
+    <a href="/">🏠 Home</a>
+    <a href="/spells">📜 Spellbook</a>
+    <a href="/mood">🌙 Mood</a>
+    <a href="/about">✨ About</a>
+</nav>
+
+<h1>📖 Enchanted Spellbook</h1>
+<div class="bookmark">🔖</div>
+
+<div class="spellbook-container">
+    <!-- Left page -->
+    <div class="page page-left">
+        <h2>✨ Spells of {{ spells|length }} Realms</h2>
+        <p>
+            Each spell you add is written into this living grimoire.<br>
+            As your list grows, so does your magic. 💫
+        </p>
+        <p style="margin-top:20px; font-size:18px;">
+            Tip: Add more spells to awaken hidden pages…
+        </p>
+        <button class="potion-btn" onclick="window.location.href='/add_spell'">🧪 Add New Spell</button>
+    </div>
+
+    <!-- Right page -->
+    <div class="page page-right">
+        <div class="spell-list">
+    {% if spells %}
+        {% for spell in spells %}
+            <div class="spell-card">
+                <h3 class="spell-title">{{ spell[1] }} {{ spell[3] }}</h3>
+                <p><strong>🧪 Category:</strong> {{ spell[2] }}</p>
+                <p class="created">📜 Born: {{ spell[4] }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="empty">🕯️ No spells yet... the pages are waiting.</p>
+    {% endif %}
+</div>
+    </div>
+</div>
+
+<!-- floating emojis script if you already added it can stay here -->
+
+<audio id="pageturn" src="/static/sounds/page.mp3" preload="auto"></audio>
+<script>
+function playTurnSound() {
+    const sound = document.getElementById("pageturn");
+    sound.currentTime = 0;
+    sound.play();
+}
+
+// Play sound when the page loads
+window.addEventListener("load", () => {
+    playTurnSound();
+});
+
+// Play sound when bookmark is clicked (optional)
+const bookmark = document.querySelector(".bookmark");
+if (bookmark) {
+    bookmark.addEventListener("click", playTurnSound);
+}
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const book = document.querySelector(".spellbook-container");
+    setTimeout(() => {
+        book.classList.add("open");
+    }, 300);
+});
+</script>
+</body>
+</html>
