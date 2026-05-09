@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🪄 Mood Magic</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<h1>🔮 Mood Spell Oracle</h1>
+<p>Tell the spellbook how you're feeling and it will respond with magic...</p>
+
+<form method="POST">
+    <select name="mood" class="mood-dropdown">
+        <option value="">✨ Select a feeling...</option>
+        <option value="happy">😊 Happy</option>
+        <option value="sad">😢 Sad</option>
+        <option value="angry">😡 Angry</option>
+        <option value="tired">😴 Tired</option>
+        <option value="scared">😨 Scared</option>
+    </select>
+
+    <button class="potion-btn" type="submit">🔮 Reveal Spell</button>
+</form>
+
+{% if suggested_spell %}
+<div class="spell-result">
+    <h2>{{ suggested_spell }}</h2>
+</div>
+{% endif %}
+
+</body>
+</html>
