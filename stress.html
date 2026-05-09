@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stress Tracker 🌿</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<h1>🧘‍♀️ Stress Tracker 🌿</h1>
+
+{% if message %}
+<p class="success">{{ message }}</p>
+{% endif %}
+
+{% if advice %}
+<p class="advice">{{ advice }}</p>
+{% endif %}
+
+<form method="POST" class="stress-form">
+    <label>⚖ Stress Level (1-10):</label><br>
+    <input type="number" name="level" min="1" max="10" required><br><br>
+
+    <label>📝 Notes:</label><br>
+    <textarea name="note" placeholder="Write feelings here..."></textarea><br><br>
+
+    <button class="magic-btn">✨ Log Emotion</button>
+</form>
+<h2>📈 Stress Crystal Energy Chart</h2>
+<canvas id="stressChart" width="400" height="200"></canvas>
+<br><br>
+
+<h2>📖 Emotional History</h2>
+
+<div class="history-container">
+<table class="history-table">
+    <tr>
+        <th>🔢 Level</th>
+        <th>💬 Notes</th>
+        <th>⏳ Time</th>
+    </tr>
+    {% for row in logs %}
+    <tr>
+        <td>{{ row[0] }}</td>
+        <td>{{ row[1] }}</td>
+        <td>{{ row[2] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+
+<br>
+<button onclick="window.location.href='/'">🏠 Back</button>
+
+</body>
+</html>
